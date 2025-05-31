@@ -1,0 +1,38 @@
+name: Release Falcon Console Demo
+
+on:
+  push:
+    tags:
+      - 'v*'    # Triggers on version tags like v1.0.0
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build (Release)
+      run: dotnet publish -c Release -o publish
+
+    - name: Package build artifacts
+      run: |
+        cd publish
+        Compress-Archive * ../ZentrixLabs.FalconConsoleDemo.zip
+      shell: pwsh
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ZentrixLabs.FalconConsoleDemo.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
