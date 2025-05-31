@@ -1,6 +1,9 @@
 
 # ZentrixLabs Falcon SDK Console Demo
 
+[![Release](https://img.shields.io/github/v/release/ZentrixLabs/ZentrixLabs.FalconConsoleDemo?label=Release)](https://github.com/ZentrixLabs/ZentrixLabs.FalconConsoleDemo/releases/latest)
+[![.NET](https://img.shields.io/badge/.NET-9.0-blue?logo=dotnet)](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+
 Welcome to the **ZentrixLabs Falcon SDK Console Demo**! This console app is designed to showcase how to use the **ZentrixLabs.FalconSdk** to interact with the CrowdStrike Falcon API. It’s a hands-on, interactive playground that lets you authenticate, fetch device data, and query vulnerabilities—all from the console.
 
 ---
@@ -22,7 +25,7 @@ Welcome to the **ZentrixLabs Falcon SDK Console Demo**! This console app is desi
 
 ## 🚀 Prerequisites
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - A CrowdStrike API client ID and secret with appropriate permissions
 
 > **Note:** For the best experience (including emoji support), use **Windows Terminal** or a modern console that supports UTF-8. If you’re on PowerShell 5, cmd.exe, or a non-Unicode-friendly console, emojis will gracefully fallback to plain text.
@@ -34,7 +37,7 @@ Welcome to the **ZentrixLabs Falcon SDK Console Demo**! This console app is desi
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/YourOrg/ZentrixLabs.FalconSdk.ConsoleDemo.git
+   git clone https://github.com/ZentrixLabs/ZentrixLabs.FalconSdk.ConsoleDemo.git
    cd ZentrixLabs.FalconSdk.ConsoleDemo
    ```
 
@@ -104,7 +107,7 @@ ZentrixLabs.FalconConsoleDemo/
 ├── Utilities/
 │   └── ConsoleHelpers.cs         # Emoji fallback and UI helpers
 │
-└── appsettings.json (optional)    # Usually left blank; user provides values at runtime
+└── appsettings.json (optional)    # Users provide values at runtime
 ```
 
 ---
