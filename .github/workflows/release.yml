@@ -32,8 +32,20 @@ jobs:
       - name: Update .csproj version
         run: |
           $csprojPath = "ZentrixLabs.FalconConsoleDemo.csproj"
-          (Get-Content $csprojPath) -replace '(<Version>).*?(</Version>)', "`$1${{ env.APP_VERSION }}`$2" | Set-Content $csprojPath
+          $version = "${{ env.APP_VERSION }}"
+          $content = Get-Content $csprojPath
+
+          if ($content -notmatch "<Version>.*?</Version>") {
+            # Insert <Version> tag inside the first PropertyGroup
+            $content = $content -replace '(<PropertyGroup>)', "`$1`n    <Version>$version</Version>"
+          } else {
+            # Replace existing <Version> tag
+            $content = $content -replace '(<Version>).*?(</Version>)', "`$1$version`$2"
+          }
+
+          $content | Set-Content $csprojPath
         shell: powershell
+
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
