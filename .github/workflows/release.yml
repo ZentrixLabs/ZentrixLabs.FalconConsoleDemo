@@ -3,50 +3,56 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
 
 jobs:
   build-and-release:
     runs-on: windows-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        run: |
+          $version = "${{ github.ref_name }}"
+          $version = $version -replace '^v', ''
+          echo "APP_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
+        shell: powershell
+
+      - name: Debug APP_VERSION
+        run: echo "APP_VERSION is ${{ env.APP_VERSION }}"
+        shell: powershell
+
+      - name: Update .csproj version
+        run: |
+          $csprojPath = "ZentrixLabs.FalconConsoleDemo.csproj"
+          (Get-Content $csprojPath) -replace '(<Version>).*?(</Version>)', "`$1${{ env.APP_VERSION }}`$2" | Set-Content $csprojPath
+        shell: powershell
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
-      - name: Extract version from tag
-        id: get_version
-        run: |
-          echo "##[set-output name=version;]${GITHUB_REF#refs/tags/v}"
-        shell: bash
-
-      - name: Update .csproj version
-        run: |
-          $version = "${{ steps.get_version.outputs.version }}"
-          (Get-Content ZentrixLabs.FalconConsoleDemo.csproj) -replace '(<Version>).*?(</Version>)', "`$1$version`$2" | Set-Content ZentrixLabs.FalconConsoleDemo.csproj
-        shell: pwsh
-
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build and publish
-        run: dotnet publish -c Release -o publish
+      - name: Build self-contained executable
+        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=false -p:Version=${{ env.APP_VERSION }} -o publish
 
-      - name: Package build artifacts
-        run: |
-          cd publish
-          Compress-Archive * ../ZentrixLabs.FalconConsoleDemo.zip
-        shell: pwsh
+      - name: Debug publish output
+        run: dir publish
+        shell: powershell
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ZentrixLabs.FalconConsoleDemo.zip
+          files: publish/ZentrixLabs.FalconConsoleDemo.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
