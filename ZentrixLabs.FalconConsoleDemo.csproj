@@ -10,10 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ZentrixLabs.FalconSdk\ZentrixLabs.FalconSdk.csproj" />
+    <PackageReference Include="ZentrixLabs.FalconSdk" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
