@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ZentrixLabs.FalconConsoleDemo": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
