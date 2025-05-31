@@ -29,7 +29,7 @@ namespace ZentrixLabs.FalconConsoleDemo.Models
             Console.WriteLine("using ZentrixLabs.FalconSdk.Configuration;");
             Console.WriteLine("using Microsoft.Extensions.Options;");
             Console.WriteLine();
-            Console.WriteLine("// Example usage");
+            Console.WriteLine("// Setup your CrowdStrikeOptions");
             Console.WriteLine("var options = new CrowdStrikeOptions");
             Console.WriteLine("{");
             Console.WriteLine("    BaseUrl = \"https://api.crowdstrike.com\",");
@@ -37,14 +37,24 @@ namespace ZentrixLabs.FalconConsoleDemo.Models
             Console.WriteLine("    ClientSecret = \"<your-client-secret>\"");
             Console.WriteLine("};");
             Console.WriteLine();
+            Console.WriteLine("// Create the HTTP client and authentication service");
             Console.WriteLine("var httpClient = new HttpClient();");
             Console.WriteLine("var authService = new CrowdStrikeAuthService(httpClient, Options.Create(options));");
             Console.WriteLine();
-            Console.WriteLine("// Remember: Use this inside an async method or call .GetAwaiter().GetResult() for sync contexts.");
-            Console.WriteLine("var token = await authService.GetAccessTokenAsync();");
+            Console.WriteLine("// Option 1: Async context (recommended)");
+            Console.WriteLine("public static async Task AuthenticateAsync()");
+            Console.WriteLine("{");
+            Console.WriteLine("    var token = await authService.GetAccessTokenAsync();");
+            Console.WriteLine("    Console.WriteLine($\"Access Token: {token}\");");
+            Console.WriteLine("}");
+            Console.WriteLine();
+            Console.WriteLine("// Option 2: Synchronous context (e.g. in Main)");
+            Console.WriteLine("var token = authService.GetAccessTokenAsync().GetAwaiter().GetResult();");
             Console.WriteLine("Console.WriteLine($\"Access Token: {token}\");");
             Console.WriteLine("----------------------------------------");
             Console.WriteLine();
         }
     }
 }
+// This code provides a detailed explanation of the CrowdStrike authentication process,
+// including how to use the `CrowdStrikeAuthService` to obtain an access token.

@@ -1,4 +1,5 @@
 ﻿using System;
+using ZentrixLabs.FalconConsoleDemo.Models;
 using ZentrixLabs.FalconConsoleDemo.Utilities;
 using ZentrixLabs.FalconSdk.Services;
 
@@ -22,6 +23,7 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
             }
 
             ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
         }
 
         public static async Task DemoGetDeviceIdsAsync(CrowdStrikeDeviceService deviceService)
@@ -45,6 +47,13 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
                     {
                         Console.WriteLine($" - {id}");
                     }
+
+                    DemoContext.LastUsedAid = deviceIds.FirstOrDefault();
+                    if (!string.IsNullOrEmpty(DemoContext.LastUsedAid))
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine($"{ConsoleHelpers.EmojiOrText("💡", "[Tip]")} The first AID has been saved and can be reused in other demos.");
+                    }
                 }
             }
             catch (Exception ex)
@@ -54,14 +63,33 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
 
             Console.WriteLine();
             ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
         }
 
         public static async Task DemoGetDeviceDetailsAsync(CrowdStrikeDeviceService deviceService)
         {
             Console.WriteLine();
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔍", "[Device Details]")} Demo: Get Device Details by AID");
-            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a device ID (AID): ");
-            var aid = Console.ReadLine() ?? "";
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a device ID (AID)");
+            if (!string.IsNullOrEmpty(DemoContext.LastUsedAid))
+            {
+                Console.Write($" [{DemoContext.LastUsedAid}]: ");
+            }
+            else
+            {
+                Console.Write(": ");
+            }
+
+            var input = Console.ReadLine();
+            var aid = string.IsNullOrWhiteSpace(input) ? DemoContext.LastUsedAid : input;
+
+            if (string.IsNullOrWhiteSpace(aid))
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("⚠️", "[Warning]")} No device ID (AID) provided. Returning to menu.");
+                ConsoleHelpers.WaitForUser();
+                ConsoleHelpers.ClearScreen();
+                return;
+            }
 
             try
             {
@@ -85,14 +113,33 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
 
             Console.WriteLine();
             ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
         }
 
         public static async Task DemoGetVulnerabilityIdsAsync(CrowdStrikeSpotlightService spotlightService)
         {
             Console.WriteLine();
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔦", "[Vuln IDs]")} Demo: Get Vulnerability IDs by AID");
-            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a device ID (AID): ");
-            var aid = Console.ReadLine() ?? "";
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a device ID (AID)");
+            if (!string.IsNullOrEmpty(DemoContext.LastUsedAid))
+            {
+                Console.Write($" [{DemoContext.LastUsedAid}]: ");
+            }
+            else
+            {
+                Console.Write(": ");
+            }
+
+            var input = Console.ReadLine();
+            var aid = string.IsNullOrWhiteSpace(input) ? DemoContext.LastUsedAid : input;
+
+            if (string.IsNullOrWhiteSpace(aid))
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("⚠️", "[Warning]")} No device ID (AID) provided. Returning to menu.");
+                ConsoleHelpers.WaitForUser();
+                ConsoleHelpers.ClearScreen();
+                return;
+            }
 
             try
             {
@@ -117,14 +164,33 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
 
             Console.WriteLine();
             ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
         }
 
         public static async Task DemoGetVulnerabilityDetailsAsync(CrowdStrikeSpotlightService spotlightService)
         {
             Console.WriteLine();
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔦", "[Vuln Details]")} Demo: Get Vulnerability Details by AID");
-            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a device ID (AID): ");
-            var aid = Console.ReadLine() ?? "";
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a device ID (AID)");
+            if (!string.IsNullOrEmpty(DemoContext.LastUsedAid))
+            {
+                Console.Write($" [{DemoContext.LastUsedAid}]: ");
+            }
+            else
+            {
+                Console.Write(": ");
+            }
+
+            var input = Console.ReadLine();
+            var aid = string.IsNullOrWhiteSpace(input) ? DemoContext.LastUsedAid : input;
+
+            if (string.IsNullOrWhiteSpace(aid))
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("⚠️", "[Warning]")} No device ID (AID) provided. Returning to menu.");
+                ConsoleHelpers.WaitForUser();
+                ConsoleHelpers.ClearScreen();
+                return;
+            }
 
             try
             {
@@ -152,6 +218,9 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
 
             Console.WriteLine();
             ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
         }
     }
 }
+// This code provides methods for various SDK demos, including authentication, fetching device IDs, and vulnerability details.
+// Each method interacts with the respective service and handles user input/output, including error handling and displaying results.

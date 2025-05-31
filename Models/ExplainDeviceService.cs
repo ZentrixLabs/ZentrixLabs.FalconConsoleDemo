@@ -45,17 +45,35 @@ namespace ZentrixLabs.FalconConsoleDemo.Models
             Console.WriteLine("var authService = new CrowdStrikeAuthService(httpClient, Options.Create(options));");
             Console.WriteLine("var deviceService = new CrowdStrikeDeviceService(httpClient, authService, Options.Create(options));");
             Console.WriteLine();
-            Console.WriteLine("// Example: Get device IDs by hostname");
-            Console.WriteLine("var deviceIds = await deviceService.GetDeviceIdsAsync(\"your-hostname\");");
+            Console.WriteLine("// Option 1: Async context (recommended)");
+            Console.WriteLine("public static async Task QueryDevicesAsync()");
+            Console.WriteLine("{");
+            Console.WriteLine("    var deviceIds = await deviceService.GetDeviceIdsAsync(\"your-hostname\");");
+            Console.WriteLine("    foreach (var id in deviceIds)");
+            Console.WriteLine("    {");
+            Console.WriteLine("        Console.WriteLine($\"Found device ID: {id}\");");
+            Console.WriteLine("    }");
+            Console.WriteLine();
+            Console.WriteLine("    if (deviceIds.Any())");
+            Console.WriteLine("    {");
+            Console.WriteLine("        var deviceDetail = await deviceService.GetDeviceDetailsAsync(deviceIds.First());");
+            Console.WriteLine("        if (deviceDetail != null)");
+            Console.WriteLine("        {");
+            Console.WriteLine("            Console.WriteLine($\"Hostname: {deviceDetail.Hostname}, OS: {deviceDetail.OSVersion}\");");
+            Console.WriteLine("        }");
+            Console.WriteLine("    }");
+            Console.WriteLine("}");
+            Console.WriteLine();
+            Console.WriteLine("// Option 2: Synchronous context (use with caution in console apps)");
+            Console.WriteLine("var deviceIds = deviceService.GetDeviceIdsAsync(\"your-hostname\").GetAwaiter().GetResult();");
             Console.WriteLine("foreach (var id in deviceIds)");
             Console.WriteLine("{");
             Console.WriteLine("    Console.WriteLine($\"Found device ID: {id}\");");
             Console.WriteLine("}");
             Console.WriteLine();
-            Console.WriteLine("// Example: Get device details");
             Console.WriteLine("if (deviceIds.Any())");
             Console.WriteLine("{");
-            Console.WriteLine("    var deviceDetail = await deviceService.GetDeviceDetailsAsync(deviceIds.First());");
+            Console.WriteLine("    var deviceDetail = deviceService.GetDeviceDetailsAsync(deviceIds.First()).GetAwaiter().GetResult();");
             Console.WriteLine("    if (deviceDetail != null)");
             Console.WriteLine("    {");
             Console.WriteLine("        Console.WriteLine($\"Hostname: {deviceDetail.Hostname}, OS: {deviceDetail.OSVersion}\");");
@@ -66,3 +84,5 @@ namespace ZentrixLabs.FalconConsoleDemo.Models
         }
     }
 }
+// This code provides a detailed explanation of the CrowdStrike device service,
+// including how to use the `CrowdStrikeDeviceService` to retrieve device information.

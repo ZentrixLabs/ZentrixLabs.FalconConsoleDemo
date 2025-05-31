@@ -10,11 +10,21 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Print environment check once at app start
-        if (!ConsoleHelpers.IsWindowsTerminal())
+        // Force UTF-8 encoding at startup for emoji support
+        try
         {
-            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("⚠️", "[Warning]")} You're not running inside Windows Terminal!");
-            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("💡", "[Info]")} For the best experience (including emoji support), please run this demo in Windows Terminal or a console that supports UTF-8.");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+        }
+        catch
+        {
+            // Ignore errors; fallback will handle non-UTF8 consoles
+        }
+
+        // Print environment check once at app start
+        if (!ConsoleHelpers.SupportsEmoji())
+        {
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("⚠️", "[Warning]")} You're not running inside a fully emoji-supported terminal!");
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("💡", "[Info]")} For the best experience (including emoji support), please run this demo in Windows Terminal, VS Code terminal, or PowerShell 7+.");
             Console.WriteLine();
         }
 

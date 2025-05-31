@@ -44,13 +44,24 @@ namespace ZentrixLabs.FalconConsoleDemo.Models
             Console.WriteLine("var authService = new CrowdStrikeAuthService(httpClient, Options.Create(options));");
             Console.WriteLine("var spotlightService = new CrowdStrikeSpotlightService(httpClient, authService, Options.Create(options));");
             Console.WriteLine();
-            Console.WriteLine("// Example: Get vulnerability IDs for a device");
-            Console.WriteLine("var deviceAid = \"<your-device-aid>\";");
-            Console.WriteLine("var vulnIds = await spotlightService.GetVulnerabilityIdsForHostAsync(deviceAid);");
+            Console.WriteLine("// Option 1: Async context (recommended)");
+            Console.WriteLine("public static async Task QueryVulnerabilitiesAsync(string deviceAid)");
+            Console.WriteLine("{");
+            Console.WriteLine("    var vulnIds = await spotlightService.GetVulnerabilityIdsForHostAsync(deviceAid);");
+            Console.WriteLine("    Console.WriteLine($\"Found {vulnIds.Count} vulnerability IDs.\");");
+            Console.WriteLine();
+            Console.WriteLine("    var vulnDetails = await spotlightService.GetVulnerabilityDetailsAsync(deviceAid);");
+            Console.WriteLine("    foreach (var vuln in vulnDetails)");
+            Console.WriteLine("    {");
+            Console.WriteLine("        Console.WriteLine($\"CVE: {vuln.Cve.Id}, Severity: {vuln.Severity}, Status: {vuln.Status}\");");
+            Console.WriteLine("    }");
+            Console.WriteLine("}");
+            Console.WriteLine();
+            Console.WriteLine("// Option 2: Synchronous context (use with caution in console apps)");
+            Console.WriteLine("var vulnIds = spotlightService.GetVulnerabilityIdsForHostAsync(deviceAid).GetAwaiter().GetResult();");
             Console.WriteLine("Console.WriteLine($\"Found {vulnIds.Count} vulnerability IDs.\");");
             Console.WriteLine();
-            Console.WriteLine("// Example: Get detailed vulnerability info");
-            Console.WriteLine("var vulnDetails = await spotlightService.GetVulnerabilityDetailsAsync(deviceAid);");
+            Console.WriteLine("var vulnDetails = spotlightService.GetVulnerabilityDetailsAsync(deviceAid).GetAwaiter().GetResult();");
             Console.WriteLine("foreach (var vuln in vulnDetails)");
             Console.WriteLine("{");
             Console.WriteLine("    Console.WriteLine($\"CVE: {vuln.Cve.Id}, Severity: {vuln.Severity}, Status: {vuln.Status}\");");
@@ -60,3 +71,5 @@ namespace ZentrixLabs.FalconConsoleDemo.Models
         }
     }
 }
+// This code provides a detailed explanation of the CrowdStrikeSpotlightService, including its purpose, key methods, usage examples, and code snippets for integration.
+// It is designed to help developers understand how to use the service effectively in their applications.

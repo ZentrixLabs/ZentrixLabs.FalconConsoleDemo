@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HN3gyom5HHU=",
+  "dgSpecHash": "yGpV/dinN4g=",
   "success": true,
   "projectFilePath": "D:\\Github\\ZentrixLabs.FalconConsoleDemo\\ZentrixLabs.FalconConsoleDemo.csproj",
   "expectedPackageFiles": [
@@ -32,9 +32,13 @@
     "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.extensions.options\\9.0.5\\microsoft.extensions.options.9.0.5.nupkg.sha512",
     "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\9.0.5\\microsoft.extensions.options.configurationextensions.9.0.5.nupkg.sha512",
     "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.5\\microsoft.extensions.primitives.9.0.5.nupkg.sha512",
+    "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.5\\microsoft.net.illink.tasks.9.0.5.nupkg.sha512",
     "C:\\Users\\mbecker\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.5\\system.diagnostics.eventlog.9.0.5.nupkg.sha512",
     "C:\\Users\\mbecker\\.nuget\\packages\\system.text.json\\9.0.5\\system.text.json.9.0.5.nupkg.sha512",
-    "C:\\Users\\mbecker\\.nuget\\packages\\zentrixlabs.falconsdk\\1.1.0\\zentrixlabs.falconsdk.1.1.0.nupkg.sha512"
+    "C:\\Users\\mbecker\\.nuget\\packages\\zentrixlabs.falconsdk\\1.1.0\\zentrixlabs.falconsdk.1.1.0.nupkg.sha512",
+    "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.5\\microsoft.netcore.app.runtime.win-x64.9.0.5.nupkg.sha512",
+    "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.5\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.5.nupkg.sha512",
+    "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.5\\microsoft.aspnetcore.app.runtime.win-x64.9.0.5.nupkg.sha512"
   ],
   "logs": []
 }

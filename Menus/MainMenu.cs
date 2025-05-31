@@ -34,7 +34,7 @@ public class MainMenu
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("2️⃣ 🖥️", "2. [Device]")} Device Service");
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("3️⃣ 🔦", "3. [Spotlight]")} Spotlight Service");
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("0️⃣ 🚪", "0. [Exit]")} Exit");
-            Console.Write("👉 Choose an option: ");
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[>]")} Choose an option: ");
             var choice = Console.ReadLine();
 
             switch (choice)
