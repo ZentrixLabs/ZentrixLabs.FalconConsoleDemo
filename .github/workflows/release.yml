@@ -18,6 +18,18 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          echo "##[set-output name=version;]${GITHUB_REF#refs/tags/v}"
+        shell: bash
+
+      - name: Update .csproj version
+        run: |
+          $version = "${{ steps.get_version.outputs.version }}"
+          (Get-Content ZentrixLabs.FalconConsoleDemo.csproj) -replace '(<Version>).*?(</Version>)', "`$1$version`$2" | Set-Content ZentrixLabs.FalconConsoleDemo.csproj
+        shell: pwsh
+
       - name: Restore dependencies
         run: dotnet restore
 
