@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iyDCp1dvsa4=",
+  "dgSpecHash": "HN3gyom5HHU=",
   "success": true,
   "projectFilePath": "D:\\Github\\ZentrixLabs.FalconConsoleDemo\\ZentrixLabs.FalconConsoleDemo.csproj",
   "expectedPackageFiles": [
@@ -33,7 +33,8 @@
     "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\9.0.5\\microsoft.extensions.options.configurationextensions.9.0.5.nupkg.sha512",
     "C:\\Users\\mbecker\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.5\\microsoft.extensions.primitives.9.0.5.nupkg.sha512",
     "C:\\Users\\mbecker\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.5\\system.diagnostics.eventlog.9.0.5.nupkg.sha512",
-    "C:\\Users\\mbecker\\.nuget\\packages\\system.text.json\\9.0.5\\system.text.json.9.0.5.nupkg.sha512"
+    "C:\\Users\\mbecker\\.nuget\\packages\\system.text.json\\9.0.5\\system.text.json.9.0.5.nupkg.sha512",
+    "C:\\Users\\mbecker\\.nuget\\packages\\zentrixlabs.falconsdk\\1.1.0\\zentrixlabs.falconsdk.1.1.0.nupkg.sha512"
   ],
   "logs": []
 }

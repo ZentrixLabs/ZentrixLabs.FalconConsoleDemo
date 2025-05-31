@@ -644,9 +644,8 @@
           "buildTransitive/net8.0/System.Text.Json.targets": {}
         }
       },
-      "ZentrixLabs.FalconSdk/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
+      "ZentrixLabs.FalconSdk/1.1.0": {
+        "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "9.0.5",
           "Microsoft.Extensions.Http": "9.0.5",
@@ -654,10 +653,14 @@
           "System.Text.Json": "9.0.5"
         },
         "compile": {
-          "bin/placeholder/ZentrixLabs.FalconSdk.dll": {}
+          "lib/net9.0/ZentrixLabs.FalconSdk.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "bin/placeholder/ZentrixLabs.FalconSdk.dll": {}
+          "lib/net9.0/ZentrixLabs.FalconSdk.dll": {
+            "related": ".xml"
+          }
         }
       }
     }
@@ -1634,17 +1637,26 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "ZentrixLabs.FalconSdk/1.0.0": {
-      "type": "project",
-      "path": "../ZentrixLabs.FalconSdk/ZentrixLabs.FalconSdk.csproj",
-      "msbuildProject": "../ZentrixLabs.FalconSdk/ZentrixLabs.FalconSdk.csproj"
+    "ZentrixLabs.FalconSdk/1.1.0": {
+      "sha512": "2peTU1oTLhT9DCck9QyV1HH1iBOBaEEUAa1eF1z0l8/LPzVy9esdSjb/jSaNm1bAf9gyHm5rV+iOTbaR4qONOw==",
+      "type": "package",
+      "path": "zentrixlabs.falconsdk/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net9.0/ZentrixLabs.FalconSdk.dll",
+        "lib/net9.0/ZentrixLabs.FalconSdk.xml",
+        "zentrixlabs.falconsdk.1.1.0.nupkg.sha512",
+        "zentrixlabs.falconsdk.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "Microsoft.Extensions.Configuration >= 9.0.5",
       "Microsoft.Extensions.Hosting >= 9.0.5",
-      "ZentrixLabs.FalconSdk >= 1.0.0"
+      "ZentrixLabs.FalconSdk >= 1.1.0"
     ]
   },
   "packageFolders": {
@@ -1679,11 +1691,7 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {
-            "D:\\Github\\ZentrixLabs.FalconSdk\\ZentrixLabs.FalconSdk.csproj": {
-              "projectPath": "D:\\Github\\ZentrixLabs.FalconSdk\\ZentrixLabs.FalconSdk.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -1709,6 +1717,10 @@
           "Microsoft.Extensions.Hosting": {
             "target": "Package",
             "version": "[9.0.5, )"
+          },
+          "ZentrixLabs.FalconSdk": {
+            "target": "Package",
+            "version": "[1.1.0, )"
           }
         },
         "imports": [
