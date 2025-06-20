@@ -339,8 +339,42 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
             ConsoleHelpers.WaitForUser();
             ConsoleHelpers.ClearScreen();
         }
+        public static async Task DemoGetAlertsAsync(CrowdStrikeAuthService authService, CrowdStrikeOptions options)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🚨", "[Alerts]")} Demo: Get Falcon Alerts");
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a filter (or leave blank for all): ");
+            var filter = Console.ReadLine();
+
+            var httpClient = new HttpClient();
+            var alertService = new AlertService(httpClient, authService, Microsoft.Extensions.Options.Options.Create(options), Microsoft.Extensions.Logging.Abstractions.NullLogger<AlertService>.Instance);
+
+            try
+            {
+                var idsResult = await alertService.GetAlertIdsAsync(string.IsNullOrWhiteSpace(filter) ? null : filter);
+                if (idsResult.Data.Count == 0)
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} No alerts found.");
+                }
+                else
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} Found {idsResult.Data.Count} alert IDs.");
+                    var detailsResult = await alertService.GetAlertDetailsAsync(idsResult.Data);
+                    foreach (var alert in detailsResult.Data)
+                    {
+                        Console.WriteLine($" - [{alert.Severity}] {alert.Name} (ID: {alert.Id}) Host: {alert.Hostname} Status: {alert.Status}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔥", "[Error]")} Error fetching alerts: {ex.Message}");
+            }
+
+            ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
+        }
     }
-    
 }
 // This code provides methods for various SDK demos, including authentication, fetching device IDs, and vulnerability details.
 // Each method interacts with the respective service and handles user input/output, including error handling and displaying results.

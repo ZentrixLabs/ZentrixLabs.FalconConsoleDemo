@@ -36,6 +36,7 @@ public class MainMenu
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("4️⃣ 🛠️", "4. [Remediations]")} Get Vulnerability Remediations");
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("5️⃣ #️⃣", "5. [Counts]")} Get Vulnerability Counts");
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("6️⃣ 🧠", "6. [Eval Logic]")} Get Evaluation Logic");
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("7️⃣ 🚨", "7. [Alerts]")} Get Falcon Alerts");
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("0️⃣ 🔙", "0. [Back]")} Back to Main Menu");
             Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Choose an option: ");
             var choice = Console.ReadLine();
@@ -67,6 +68,10 @@ public class MainMenu
                 case "6":
                     if (ConsoleHelpers.ConfirmRun())
                         await SdkDemos.DemoGetEvaluationLogicAsync(_spotlightService);
+                    break;
+                case "7":
+                    if (ConsoleHelpers.ConfirmRun())
+                        await SdkDemos.DemoGetAlertsAsync(_authService, _options);
                     break;
                 case "0":
                     back = true;
