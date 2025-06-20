@@ -220,7 +220,127 @@ namespace ZentrixLabs.FalconConsoleDemo.Demos
             ConsoleHelpers.WaitForUser();
             ConsoleHelpers.ClearScreen();
         }
+        public static async Task DemoGetVulnerabilityHostsAsync(CrowdStrikeSpotlightService spotlightService)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🖥️", "[Hosts]")} Demo: Get Vulnerability Hosts");
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a filter (or leave blank for all): ");
+            var filter = Console.ReadLine();
+
+            try
+            {
+                var result = await spotlightService.GetVulnerabilityHostsAsync(string.IsNullOrWhiteSpace(filter) ? null : filter);
+                if (result.Data.Count == 0)
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} No hosts found.");
+                }
+                else
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} Found {result.Data.Count} hosts:");
+                    foreach (var host in result.Data)
+                    {
+                        Console.WriteLine($" - {host.Hostname} (AID: {host.Aid})");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔥", "[Error]")} Error fetching hosts: {ex.Message}");
+            }
+
+            ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
+        }
+
+        public static async Task DemoGetVulnerabilityRemediationsAsync(CrowdStrikeSpotlightService spotlightService)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🛠️", "[Remediations]")} Demo: Get Vulnerability Remediations");
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a filter (or leave blank for all): ");
+            var filter = Console.ReadLine();
+
+            try
+            {
+                var result = await spotlightService.GetVulnerabilityRemediationsAsync(string.IsNullOrWhiteSpace(filter) ? null : filter);
+                if (result.Data.Count == 0)
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} No remediations found.");
+                }
+                else
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} Found {result.Data.Count} remediations:");
+                    foreach (var remediation in result.Data)
+                    {
+                        Console.WriteLine($" - {remediation.Name} (ID: {remediation.Id})");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔥", "[Error]")} Error fetching remediations: {ex.Message}");
+            }
+
+            ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
+        }
+
+        public static async Task DemoGetVulnerabilityCountsAsync(CrowdStrikeSpotlightService spotlightService)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("5️⃣", "[Counts]")} Demo: Get Vulnerability Counts");
+            Console.Write($"{ConsoleHelpers.EmojiOrText("👉", "[Input]")} Enter a filter (or leave blank for all): ");
+            var filter = Console.ReadLine();
+
+            try
+            {
+                var vulnCount = await spotlightService.GetVulnerabilityCountAsync(string.IsNullOrWhiteSpace(filter) ? null : filter);
+                var hostCount = await spotlightService.GetVulnerabilityHostCountAsync(string.IsNullOrWhiteSpace(filter) ? null : filter);
+                var remediationCount = await spotlightService.GetVulnerabilityRemediationCountAsync(string.IsNullOrWhiteSpace(filter) ? null : filter);
+
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} Vulnerability Count: {vulnCount.Data}");
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} Host Count: {hostCount.Data}");
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} Remediation Count: {remediationCount.Data}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔥", "[Error]")} Error fetching counts: {ex.Message}");
+            }
+
+            ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
+        }
+
+        public static async Task DemoGetEvaluationLogicAsync(CrowdStrikeSpotlightService spotlightService)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🧠", "[Eval Logic]")} Demo: Get Evaluation Logic");
+
+            try
+            {
+                var result = await spotlightService.GetVulnerabilityEvaluationLogicAsync();
+                if (result.Data.Count == 0)
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} No evaluation logic found.");
+                }
+                else
+                {
+                    Console.WriteLine($"{ConsoleHelpers.EmojiOrText("✅", "[Success]")} Found {result.Data.Count} evaluation logic entries:");
+                    foreach (var logic in result.Data)
+                    {
+                        Console.WriteLine($" - {logic.Name} (ID: {logic.Id})");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ConsoleHelpers.EmojiOrText("🔥", "[Error]")} Error fetching evaluation logic: {ex.Message}");
+            }
+
+            ConsoleHelpers.WaitForUser();
+            ConsoleHelpers.ClearScreen();
+        }
     }
+    
 }
 // This code provides methods for various SDK demos, including authentication, fetching device IDs, and vulnerability details.
 // Each method interacts with the respective service and handles user input/output, including error handling and displaying results.

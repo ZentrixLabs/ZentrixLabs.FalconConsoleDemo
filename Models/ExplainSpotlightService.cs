@@ -19,7 +19,12 @@ namespace ZentrixLabs.FalconConsoleDemo.Models
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("👉", "[Methods]")} Key Methods:");
             Console.WriteLine("   - GetVulnerabilityIdsForHostAsync(string aid)");
             Console.WriteLine("   - GetVulnerabilityDetailsAsync(string aid, List<string>? vulnIds = null, ...)");
-            Console.WriteLine();
+            Console.WriteLine("   - GetVulnerabilityHostsAsync(string? filter = null)");
+            Console.WriteLine("   - GetVulnerabilityRemediationsAsync(string? filter = null)");
+            Console.WriteLine("   - GetVulnerabilityCountAsync(string? filter = null)");
+            Console.WriteLine("   - GetVulnerabilityHostCountAsync(string? filter = null)");
+            Console.WriteLine("   - GetVulnerabilityRemediationCountAsync(string? filter = null)");
+            Console.WriteLine("   - GetVulnerabilityEvaluationLogicAsync()");
             Console.WriteLine($"{ConsoleHelpers.EmojiOrText("💡", "[Usage]")} Usage:");
             Console.WriteLine("Use the AID from the DeviceService to get vulnerability IDs and then details.");
             Console.WriteLine("You can use filters and facets to refine results.");
